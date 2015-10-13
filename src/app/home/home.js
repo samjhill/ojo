@@ -38,8 +38,9 @@ angular.module( 'ngBoilerplate.home', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'HomeCtrl', function HomeController( $scope ) {
-})
+.controller( 'HomeCtrl', function HomeController( $scope, $http ) {
+  
+    $http.get("http://samhillmade.it:4730/status")
+        .success(function(response) {$scope.serverStatus = response;});
 
-;
-
+});
