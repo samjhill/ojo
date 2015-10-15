@@ -7,13 +7,27 @@ angular.module('Authentication')
  
         service.Login = function (username, password, callback) {
  
- 
-            /* Use this for real authentication
-             ----------------------------------------------*/
-            $http.post('/api/authenticate', { username: username, password: password })
+                
+                $http({
+                        url:"http://samhillmade.it:4730/authenticate",
+                        method:"POST",
+                        headers: {
+                                   "Content-Type": "application/x-www-form-urlencoded",
+                                   "Authorization": "Basic " + Base64.encode(username + ':' + password)
+                        }
+                })
                 .success(function (response) {
                     callback(response);
-            });
+                })
+                .catch(function (response) {
+                    if (response.status === 401) {
+                        callback('Wrong username or password.');
+                    }
+                    else {
+                        callback(response);
+                    }
+                });
+                
  
         };
   
@@ -104,7 +118,7 @@ angular.module('Authentication')
                 chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
                 chr3 = ((enc3 & 3) << 6) | enc4;
   
-                output = output + String.fromCharCode(chr1);
+                output = output + String.CharCode(chr1);
   
                 if (enc3 != 64) {
                     output = output + String.fromCharCode(chr2);

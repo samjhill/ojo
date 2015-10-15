@@ -1,6 +1,5 @@
 angular.module( 'ngBoilerplate.login', [
   'ui.router',
-  'plusOne',
   'Authentication'
 ])
 
@@ -13,7 +12,7 @@ angular.module( 'ngBoilerplate.login', [
         templateUrl: 'login/login.tpl.html'
       }
     },
-    data:{ pageTitle: 'Login to ojo' }
+    data:{ pageTitle: 'Login' }
   });
 })
 
@@ -25,10 +24,11 @@ angular.module( 'ngBoilerplate.login', [
             $scope.dataLoading = true;
             AuthenticationService.Login($scope.username, $scope.password, function(response) {
                 if(response.success) {
+                  console.log('success');
                     AuthenticationService.SetCredentials($scope.username, $scope.password);
-                    $location.path('/');
+                    $location.path('/home');
                 } else {
-                    $scope.error = response.message;
+                    $scope.error = response;
                     $scope.dataLoading = false;
                 }
             });
