@@ -1,4 +1,27 @@
 <div id="home">
   <h1>ojo</h1>
   <h3>Ark Server Dashboard</h3>
+  
+  
+  <div class="container">
+    
+     <div class="progress-container">
+            <div class="progressLabel ng-cloak">CPU</div>
+            <div class="progressValue ng-cloak">{{ systemLoad.cpu | number : 1}}</div>
+            <div
+              round-progress
+              max="100"
+              current="systemLoad.cpu"
+              color="#45ccce"
+              bgcolor="#eaeaea"
+              radius="100"
+              stroke="20"
+              semi="true"
+              rounded="true"
+              clockwise="true"
+              responsive="false"
+              duration="800"
+              animation="easeInOutQuart">CPU</div>
+          </div>
+  </div>
 </div>

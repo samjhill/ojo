@@ -13,7 +13,8 @@
  * specified, as shown below.
  */
 angular.module( 'ngBoilerplate.home', [
-  'ui.router'
+  'ui.router',
+  'angular-svg-round-progress'
 ])
 
 /**
@@ -39,7 +40,9 @@ angular.module( 'ngBoilerplate.home', [
  */
 .controller( 'HomeCtrl', function HomeController( $scope, $http ) {
   
-    $http.get("http://samhillmade.it:4730/status")
-        .success(function(response) {$scope.serverStatus = response;});
-
+    $http.get("http://samhillmade.it:4730/systemLoad")
+        .success(function(response) {
+          $scope.systemLoad = response;
+    });
+  
 });
