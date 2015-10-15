@@ -1,8 +1,7 @@
 
 angular.module( 'ngBoilerplate.home', [
   'ui.router',
-  'angular-svg-round-progress',
-  'ngAnimate'
+  'angular-svg-round-progress'
 ])
 
 .config(function config( $stateProvider ) {
