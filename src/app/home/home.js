@@ -33,24 +33,24 @@ angular.module( 'ngBoilerplate.home', [
     };
  
     $scope.startServer = function(){
-      $parent.$scope.message.type = 'info';
-      $parent.$scope.message.data = 'Server is starting up...';
+      $scope.message.type = 'info';
+      $scope.message.data = 'Server is starting up...';
       
       $http.post("http://samhillmade.it:4730/start")
           .success(function(response) {
-            $parent.$scope.message.type = 'success';
-            $parent.$scope.message.data = response;
+            $scope.message.type = 'success';
+            $scope.message.data = response;
       });
     };
     
     $scope.stopServer = function(){
-      $parent.$scope.message.type = 'info';
-      $parent.$scope.message.data = 'Server is shutting down...';
+      $scope.message.type = 'info';
+      $scope.message.data = 'Server is shutting down...';
       
       $http.post("http://samhillmade.it:4730/stop")
           .success(function(response) {
-            $parent.$scope.message.type = 'success';
-            $parent.$scope.message.data = response;
+            $scope.message.type = 'success';
+            $scope.message.data = response;
       });
     };
     
