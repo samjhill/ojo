@@ -43,8 +43,14 @@
               animation="easeInOutQuart"></div>
           </div>
      
-     <!--<div class="systemStatus">
-        {{ systemStatus }}
-     </div>-->
+     <div>
+      <button class="btn btn-danger" ng-click="stopServer()">Stop Server</button>
+     </div>
+  </div>
+  
+  <div class="container" ng-show="systemStatus.serverRunning == 'No'">
+    <div>
+      <button class="btn btn-success" ng-click="startServer()">Start Server</button>
+    </div>
   </div>
 </div>
