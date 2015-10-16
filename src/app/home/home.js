@@ -33,8 +33,7 @@ angular.module( 'ngBoilerplate.home', [
     };
  
     $scope.startServer = function(){
-      $scope.message.type = 'info';
-      $scope.message.data = 'The ARK is starting up...';
+      alertService.add('info', 'Starting up...');
       
       $http.post("http://samhillmade.it:4730/start")
           .success(function(response) {
@@ -43,14 +42,17 @@ angular.module( 'ngBoilerplate.home', [
     };
     
     $scope.stopServer = function(){
-      $scope.message.type = 'info';
-      $scope.message.data = 'Server is shutting down...';
+      alertService.add('info', 'Shutting down...');
       
       $http.post("http://samhillmade.it:4730/stop")
           .success(function(response) {
             alertService.add('success', 'The ARK is now offline.');
       });
     };
+    
+    $scope.spawnAlert = function(){
+      alertService.add('info', 'Test alert');
+    }
     
     $timeout($scope.getStatus, 5000); //update every 5 seconds
     
