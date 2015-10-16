@@ -34,12 +34,11 @@ angular.module( 'ngBoilerplate.home', [
  
     $scope.startServer = function(){
       $scope.message.type = 'info';
-      $scope.message.data = 'Server is starting up...';
+      $scope.message.data = 'The ARK is starting up...';
       
       $http.post("http://samhillmade.it:4730/start")
           .success(function(response) {
-            $scope.message.type = 'success';
-            $scope.message.data = response;
+            alertService.add('success', 'The ARK is coming online.');
       });
     };
     
@@ -49,8 +48,7 @@ angular.module( 'ngBoilerplate.home', [
       
       $http.post("http://samhillmade.it:4730/stop")
           .success(function(response) {
-            $scope.message.type = 'success';
-            $scope.message.data = response;
+            alertService.add('success', 'The ARK is now offline.');
       });
     };
     

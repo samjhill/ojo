@@ -16,9 +16,22 @@
 
   </head>
   <body>
+  
+    <div class="row alert-container" ng-repeat="alert in alerts" data-ng-switch on="alert.type">
+        <div data-ng-switch-when="info">
+            <div class="alert alert-info" ng-class="alert-info" type="info" close="alert.close()">{{ alert.msg }}</div>
+        </div>
+        <div data-ng-switch-when="success">
+            <div class="alert alert-success" type="success" close="alert.close()">{{ alert.msg }}</div>
+        </div>
+        <div data-ng-switch-when="warning">
+            <div class="alert alert-warning" type="warning" close="alert.close()">{{ alert.msg }}</div>
+        </div>
+        <div data-ng-switch-when="danger">
+            <div class="alert alert-danger" type="danger" close="alert.close()">{{ alert.msg }}</div>
+        </div>
+    </div>
     
-    <div class="container alert-container"><div class="row" ng-class="">{{ message.data }}</div></div>
-
     <div class="container" ui-view="main"></div>
 
     <footer class="footer">
