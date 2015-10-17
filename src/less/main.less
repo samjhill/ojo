@@ -1,22 +1,5 @@
-/**
- * This is the main application stylesheet. It should include or import all
- * stylesheets used throughout the application as this is the only stylesheet in
- * the Grunt configuration that is automatically processed.
- */
-
-
-/**
- * First, we include the Twitter Bootstrap LESS files. Only the ones used in the
- * project should be imported as the rest are just wasting space.
- */
-
 @import '../../vendor/bootstrap/less/bootstrap.less';
 
-
-/**
- * This is our main variables file. We must include it last so we can overwrite any variable
- * definitions in our imported stylesheets.
- */
 
 @import 'variables.less';
 
@@ -57,12 +40,17 @@ pre {
   }
 }
 
-h2 {
+h1, h2, h3 {
   margin: 20px 0;
-  color: #666;
+  color: #bbb;
+  margin-top: 1em;
+  font-weight: 100;
+  line-height: 1;
 }
 
-
+p {
+  color: #333333;
+}
 /**
  * Navigation
  */
@@ -81,10 +69,14 @@ h2 {
  */
 
 .footer {
-  margin-top: 80px;
+  position: relative;
+  bottom: 0;
+  margin: 0 auto;
+  color: #bbb;
+  width: 100%;
 
   .footer-inner {
-    padding: 40px 0;
+    padding: 15px 0;
     border-top: 1px solid #DDD;
   }
 
@@ -111,13 +103,6 @@ h2 {
   }
 }
 
-
-/**
- * Now that all app-wide styles have been applied, we can load the styles for
- * all the submodules and components we are using. 
- *
- * TODO: In a later version of this boilerplate, I'd like to automate this.
- */
-
 @import '../app/home/home.less';
-
+@import '../app/login/login.less';
+@import 'all.less';

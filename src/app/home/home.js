@@ -1,27 +1,9 @@
-/**
- * Each section of the site has its own module. It probably also has
- * submodules, though this boilerplate is too simple to demonstrate it. Within
- * `src/app/home`, however, could exist several additional folders representing
- * additional modules that would then be listed as dependencies of this one.
- * For example, a `note` section could have the submodules `note.create`,
- * `note.delete`, `note.edit`, etc.
- *
- * Regardless, so long as dependencies are managed correctly, the build process
- * will automatically take take of the rest.
- *
- * The dependencies block here is also where component dependencies should be
- * specified, as shown below.
- */
+
 angular.module( 'ngBoilerplate.home', [
   'ui.router',
-  'plusOne'
+  'angular-svg-round-progress'
 ])
 
-/**
- * Each section or module of the site can also have its own routes. AngularJS
- * will handle ensuring they are all available at run-time, but splitting it
- * this way makes each module more "self-contained".
- */
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'home', {
     url: '/home',
@@ -35,11 +17,85 @@ angular.module( 'ngBoilerplate.home', [
   });
 })
 
-/**
- * And of course we define a controller for our route.
- */
-.controller( 'HomeCtrl', function HomeController( $scope ) {
-})
-
-;
-
+.controller( 'HomeCtrl', function HomeController( $scope, $http, $timeout, alertService ) {
+    
+    $scope.getStatus = function(){
+      $http.get($scope.baseUrl + ":" + $scope.port + "/systemLoad")
+        .success(function(response) {
+          $scope.systemLoad = response;
+      });
+          
+      $http.get($scope.baseUrl + ":" + $scope.port + "/status")
+          .success(function(response) {
+            response.players = response.players.split('/');
+            $scope.systemStatus = response;
+      });
+    };
+ 
+    $scope.startServer = function(){
+      alertService.add('info', 'Starting up...');
+      
+      $http.post($scope.baseUrl + ":" + $scope.port + "/start")
+          .success(function(response) {
+            alertService.add('success', 'The ARK is coming online.');
+      });
+    };
+    
+    $scope.stopServer = function(){
+      alertService.add('info', 'Shutting down...');
+      
+      $http.post($scope.baseUrl + ":" + $scope.port + "/stop")
+          .success(function(response) {
+            alertService.add('success', 'The ARK is now offline.');
+      });
+    };
+    
+    $scope.checkUpdate = function(){
+      $http.get($scope.baseUrl + ":" + $scope.port + "/isUpdated")
+          .success(function(response) {
+            console.log(response);
+            
+            if (response == "false") {
+              alertService.add('info', 'A new update is available.');
+            }
+      });
+    };
+    
+    /*
+     * Runs a RCON command remotely
+     * for list of commands, http://ark.gamepedia.com/Console_Commands
+     * beware, some work and some do not, and some return no data
+     */
+    $scope.runCommand = function( command ){
+          $http({
+              method: 'POST',
+              url: $scope.baseUrl + ":" + $scope.port + '/command',
+              data: 'command=' + encodeURIComponent(command),
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          })
+          .success(function(response) {
+            alertService.add('success', response);
+          });
+    };
+    
+    $scope.spawnAlert = function(){
+      alertService.add('info', 'Test alert');
+    };
+    
+    /*
+     * Initialization
+     */
+    $timeout($scope.getStatus, 5000); //update every 5 seconds
+    $timeout($scope.checkUpdate, (1000 * 60 * 15)); //update every 15 mins
+    
+    //once for startup
+    $scope.getStatus(); 
+    $scope.checkUpdate();
+      
+    //$http.get($scope.baseUrl + ":" + $scope.port + "/checkUpdate")
+    //    .success(function(response) {
+    //      $scope.update = response;
+    //});  
+    
+  
+});
