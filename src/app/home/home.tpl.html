@@ -7,11 +7,11 @@
     
      <div class="progress-container pull-left">
             <div class="progressLabel ng-cloak">CPU</div>
-            <div class="progressValue ng-cloak">{{ systemLoad.cpu | number : 1}}</div>
+            <div class="progressValue ng-cloak">{{ systemLoad[1] * 100 | number : 1}}%</div>
             <div
               round-progress
               max="100"
-              current="systemLoad.cpu"
+              current="systemLoad[1] * 100"
               color="#45ccce"
               bgcolor="#eaeaea"
               radius="100"
