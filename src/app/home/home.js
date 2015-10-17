@@ -66,7 +66,7 @@ angular.module( 'ngBoilerplate.home', [
     $scope.runCommand = function( command ){
           $http({
               method: 'POST',
-              url: 'http://localhost:4730/command',
+              url: $scope.baseUrl + ":" + $scope.port + '/command',
               data: 'command=' + encodeURIComponent(command),
               headers: {'Content-Type': 'application/x-www-form-urlencoded'}
           })
