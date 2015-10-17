@@ -53,14 +53,24 @@ angular.module( 'ngBoilerplate.home', [
     $scope.checkUpdate = function(){
       $http.get($scope.baseUrl + ":" + $scope.port + "/isUpdated")
           .success(function(response) {
-            console.log(response);
-            
+            $scope.isUpdated = response;
             if (response == "false") {
               alertService.add('info', 'A new update is available.');
+              return false;
+            }
+            else {
+              return true;
             }
       });
     };
     
+    $scope.updateServer = function(){
+      $http.post($scope.baseUrl + ":" + $scope.port + "/update")
+          .success(function(response) {
+            alertService.add('success', 'Server is going down for an update.');
+            $scope.outputText = angular.fromJson(response);
+      });
+    }
     /*
      * Runs a RCON command remotely
      * for list of commands, http://ark.gamepedia.com/Console_Commands
@@ -92,10 +102,7 @@ angular.module( 'ngBoilerplate.home', [
     $scope.getStatus(); 
     $scope.checkUpdate();
       
-    //$http.get($scope.baseUrl + ":" + $scope.port + "/checkUpdate")
-    //    .success(function(response) {
-    //      $scope.update = response;
-    //});  
+    
     
   
 });
