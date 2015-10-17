@@ -34,7 +34,7 @@ Then, modify [app.js](https://github.com/samjhill/ojo/blob/v0.3.2-release/src/ap
 
 
 Finally, open `file:///path/to/ojo/build/index.html` in your browser. If all went well, you should see something like this!
-![Image of ojo](http://i.imgur.com/gkXIoWW.png)
+![Image of ojo](http://i.imgur.com/r2welXI.png)
 
 You'll most likely want to run ojo as a service indefinitely like a website, so I'd recommend using [http-server](https://github.com/indexzero/http-server) to serve up the build folder.
 
