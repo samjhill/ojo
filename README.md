@@ -39,6 +39,7 @@ Finally, open `file:///path/to/ojo/build/index.html` in your browser. If all wen
 You'll most likely want to run ojo as a service indefinitely like a website, so I'd recommend using [http-server](https://github.com/indexzero/http-server) to serve up the build folder.
 
 ## Future Work
+ - Put server information in the login page so others can connect to the server easily
  - Have a pre-populated command section so that users don't have to look up admin commands
  - Prompt the user to update if the system needs to update
  - Include more of the information from arkWatcher's other endpoints
