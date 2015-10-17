@@ -51,10 +51,13 @@ angular.module( 'ngBoilerplate.home', [
     };
     
     $scope.checkUpdate = function(){
-      $http.get($scope.baseUrl + ":" + $scope.port + "/checkupdate")
+      $http.get($scope.baseUrl + ":" + $scope.port + "/isUpdated")
           .success(function(response) {
             console.log(response);
-            $scope.updateStatus = response;
+            
+            if (response == "false") {
+              alertService.add('info', 'A new update is available.');
+            }
       });
     };
     
