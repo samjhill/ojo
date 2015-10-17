@@ -17,7 +17,7 @@ angular.module( 'ngBoilerplate.home', [
   });
 })
 
-.controller( 'HomeCtrl', function HomeController( $scope, $http, $timeout ) {
+.controller( 'HomeCtrl', function HomeController( $scope, $http, $timeout, alertService ) {
     
     $scope.getStatus = function(){
       $http.get("http://samhillmade.it:4730/systemLoad")
@@ -50,13 +50,44 @@ angular.module( 'ngBoilerplate.home', [
       });
     };
     
+    $scope.checkUpdate = function(){
+      $http.get("http://samhillmade.it:4730/checkupdate")
+          .success(function(response) {
+            console.log(response);
+            $scope.updateStatus = response;
+      });
+    };
+    
+    /*
+     * Runs a RCON command remotely
+     * for list of commands, http://ark.gamepedia.com/Console_Commands
+     * beware, some work and some do not, and some return no data
+     */
+    $scope.runCommand = function( command ){
+          $http({
+              method: 'POST',
+              url: 'http://samhillmade.it:4730/command',
+              data: 'command=' + encodeURIComponent(command),
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          })
+          .success(function(response) {
+            alertService.add('success', response);
+          });
+    };
+    
     $scope.spawnAlert = function(){
       alertService.add('info', 'Test alert');
-    }
+    };
     
+    /*
+     * Initialization
+     */
     $timeout($scope.getStatus, 5000); //update every 5 seconds
+    $timeout($scope.checkUpdate, (1000 * 60 * 15)); //update every 15 mins
     
-    $scope.getStatus(); //one for the initial load
+    //once for startup
+    $scope.getStatus(); 
+    $scope.checkUpdate();
       
     //$http.get("http://samhillmade.it:4730/checkUpdate")
     //    .success(function(response) {

@@ -5,7 +5,7 @@
   
   <div class="container" ng-show="systemStatus.serverRunning == 'Yes'">
     
-     <div class="progress-container">
+     <div class="progress-container pull-left">
             <div class="progressLabel ng-cloak">CPU</div>
             <div class="progressValue ng-cloak">{{ systemLoad.cpu | number : 1}}</div>
             <div
@@ -24,7 +24,7 @@
               animation="easeInOutQuart">CPU</div>
           </div>
      
-     <div class="progress-container">
+     <div class="progress-container pull-left">
             <div class="progressLabel ng-cloak">Players</div>
             <div class="progressValue ng-cloak">{{ systemStatus.players[0] }} / {{ systemStatus.players[1] }}</div>
             <div
@@ -43,9 +43,18 @@
               animation="easeInOutQuart"></div>
           </div>
      
-     <div>
-      <button class="btn btn-danger" ng-click="stopServer()">Stop Server</button>
+     <div class="pull-right">
+      <h3>Run a command</h3>
+      <input ng-model="userTypedCommand" placeholder="Type an admin command here" />
+      <button class="btn btn-primary" ng-click="runCommand(userTypedCommand)">Run</button>
+      
+      <div class="danger-zone">
+        <h3>Danger Zone</h3>
+        <button class="btn btn-danger" ng-click="stopServer()">Stop Server</button>
+      </div>
      </div>
+     
+     
   </div>
   
   <div class="container" ng-show="systemStatus.serverRunning == 'No'">
@@ -53,4 +62,5 @@
       <button class="btn btn-success" ng-click="startServer()">Start Server</button>
     </div>
   </div>
+  
 </div>
