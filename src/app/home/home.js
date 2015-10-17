@@ -20,12 +20,12 @@ angular.module( 'ngBoilerplate.home', [
 .controller( 'HomeCtrl', function HomeController( $scope, $http, $timeout, alertService ) {
     
     $scope.getStatus = function(){
-      $http.get("http://samhillmade.it:4730/systemLoad")
+      $http.get($scope.baseUrl + ":" + $scope.port + "/systemLoad")
         .success(function(response) {
           $scope.systemLoad = response;
       });
           
-      $http.get("http://samhillmade.it:4730/status")
+      $http.get($scope.baseUrl + ":" + $scope.port + "/status")
           .success(function(response) {
             response.players = response.players.split('/');
             $scope.systemStatus = response;
@@ -35,7 +35,7 @@ angular.module( 'ngBoilerplate.home', [
     $scope.startServer = function(){
       alertService.add('info', 'Starting up...');
       
-      $http.post("http://samhillmade.it:4730/start")
+      $http.post($scope.baseUrl + ":" + $scope.port + "/start")
           .success(function(response) {
             alertService.add('success', 'The ARK is coming online.');
       });
@@ -44,14 +44,14 @@ angular.module( 'ngBoilerplate.home', [
     $scope.stopServer = function(){
       alertService.add('info', 'Shutting down...');
       
-      $http.post("http://samhillmade.it:4730/stop")
+      $http.post($scope.baseUrl + ":" + $scope.port + "/stop")
           .success(function(response) {
             alertService.add('success', 'The ARK is now offline.');
       });
     };
     
     $scope.checkUpdate = function(){
-      $http.get("http://samhillmade.it:4730/checkupdate")
+      $http.get($scope.baseUrl + ":" + $scope.port + "/checkupdate")
           .success(function(response) {
             console.log(response);
             $scope.updateStatus = response;
@@ -66,7 +66,7 @@ angular.module( 'ngBoilerplate.home', [
     $scope.runCommand = function( command ){
           $http({
               method: 'POST',
-              url: 'http://samhillmade.it:4730/command',
+              url: 'http://localhost:4730/command',
               data: 'command=' + encodeURIComponent(command),
               headers: {'Content-Type': 'application/x-www-form-urlencoded'}
           })
@@ -89,7 +89,7 @@ angular.module( 'ngBoilerplate.home', [
     $scope.getStatus(); 
     $scope.checkUpdate();
       
-    //$http.get("http://samhillmade.it:4730/checkUpdate")
+    //$http.get($scope.baseUrl + ":" + $scope.port + "/checkUpdate")
     //    .success(function(response) {
     //      $scope.update = response;
     //});  

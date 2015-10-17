@@ -42,6 +42,9 @@ AppCtrl.$inject = ['$scope', '$location', 'alertService'];
 
 function AppCtrl ( $scope, $location, alertService ) {
   $scope.alerts = alertService.get();
+  $scope.baseUrl = 'http://samhillmade.it';
+  $scope.port = '4730'; //port that arkWatcher is running on; default is 4730
+  
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
     if ( angular.isDefined( toState.data.pageTitle ) ) {
       $scope.pageTitle = toState.data.pageTitle + ' | ojo' ;
