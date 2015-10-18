@@ -68,9 +68,11 @@ module.exports = {
       'vendor/angular-ui-router/release/angular-ui-router.js',
       'vendor/angular-ui-utils/modules/route/route.js',
       'vendor/angular-cookies/angular-cookies.min.js',
-      'vendor/angular-svg-round-progressbar/build/roundProgress.js'
+      'vendor/angular-svg-round-progressbar/build/roundProgress.js',
+      'vendor/angular-loading-bar/build/loading-bar.min.js'
     ],
     css: [
+      'vendor/angular-loading-bar/build/loading-bar.min.css'
     ],
     assets: [
     ]

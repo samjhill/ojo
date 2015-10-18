@@ -8,7 +8,8 @@ angular.module( 'ngBoilerplate', [
   'ngBoilerplate.login',
   'ui.router',
   'Authentication',
-  'ngCookies'
+  'ngCookies',
+  'angular-loading-bar'
 ])
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
