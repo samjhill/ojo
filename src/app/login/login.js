@@ -33,5 +33,12 @@ angular.module( 'ngBoilerplate.login', [
                 }
             });
         };
+        
+        //get status
+      $http.get($scope.baseUrl + ":" + $scope.port + "/status")
+          .success(function(response) {
+            response.players = response.players.split('/');
+            $scope.systemStatus = response;
+      });
 
 });
