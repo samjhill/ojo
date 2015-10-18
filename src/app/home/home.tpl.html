@@ -2,8 +2,8 @@
   <h1>ojo</h1>
   <h3>{{ systemStatus.serverName }}</h3>
   
-  
-  <div class="container" ng-show="systemStatus.serverRunning == 'Yes'">
+  <div class="container" ng-show="systemStatus.serverRunning == 'Yes' && systemStatus.serverOnline == 'No'"><h3>Server is coming online <i class="fa fa-spinner fa-spin"></i></h3></div>
+  <div class="container" ng-show="systemStatus.serverRunning == 'Yes' && systemStatus.serverOnline == 'Yes'">
     
      <div class="progress-container col-md-2">
             <div class="progressLabel ng-cloak">CPU</div>
