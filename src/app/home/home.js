@@ -20,12 +20,12 @@ angular.module( 'ngBoilerplate.home', [
 .controller( 'HomeCtrl', function HomeController( $scope, $http, $interval, alertService ) {
     
     $scope.getStatus = function(){
-      $http.get($scope.baseUrl + ":" + $scope.port + "/systemLoad")
+      $http.get($scope.baseUrl + ":" + $scope.port + "/systemLoad", {ignoreLoadingBar: true})
         .success(function(response) {
           $scope.systemLoad = response;
       });
           
-      $http.get($scope.baseUrl + ":" + $scope.port + "/status")
+      $http.get($scope.baseUrl + ":" + $scope.port + "/status", {ignoreLoadingBar: true})
           .success(function(response) {
             response.players = response.players.split('/');
             $scope.systemStatus = response;
