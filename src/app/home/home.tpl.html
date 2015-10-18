@@ -60,7 +60,7 @@
       
       <div class="danger-zone">
         <h3>Danger Zone</h3>
-        <button ng-show="isUpdated" class="btn btn-warning" ng-click="updateServer()" tooltip="Saves, restarts, and updates the server.">Update Server</button>
+        <button ng-hide="isUpdated" class="btn btn-warning" ng-click="updateServer()" tooltip="Saves, restarts, and updates the server.">Update Server</button>
         <button class="btn btn-danger" ng-click="stopServer()">Stop Server</button>
       </div>
      </div>
