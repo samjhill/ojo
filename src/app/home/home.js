@@ -65,7 +65,7 @@ angular.module( 'ngBoilerplate.home', [
     };
     
     $scope.updateServer = function(){
-      $http.post($scope.baseUrl + ":" + $scope.port + "/update")
+      $http.get($scope.baseUrl + ":" + $scope.port + "/update")
           .success(function(response) {
             alertService.add('success', 'Server is going down for an update.');
             $scope.outputText = angular.fromJson(response);
