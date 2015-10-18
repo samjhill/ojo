@@ -31,7 +31,14 @@ angular.module( 'ngBoilerplate.home', [
             $scope.systemStatus = response;
       });
     };
- 
+    
+    $scope.getUpdateProgress = function(){
+      $http.get($scope.baseUrl + ":" + $scope.port + "/updateProgress", {ignoreLoadingBar: true})
+          .success(function(response) {
+            $scope.updateProgress = response;
+      });
+    }
+    
     $scope.startServer = function(){
       alertService.add('info', 'Starting up...');
       
@@ -68,9 +75,14 @@ angular.module( 'ngBoilerplate.home', [
       $http.get($scope.baseUrl + ":" + $scope.port + "/update")
           .success(function(response) {
             alertService.add('success', 'Server is going down for an update.');
-            $scope.outputText = angular.fromJson(response);
       });
-    }
+          
+      var updateChecker = $interval($scope.getUpdateProgress, 1000); //update every 15 mins
+      if ($scope.updateProgress == "100") {
+        $timeout.cancel( updateChecker );
+      }
+    };
+    
     /*
      * Runs a RCON command remotely
      * for list of commands, http://ark.gamepedia.com/Console_Commands
@@ -105,7 +117,7 @@ angular.module( 'ngBoilerplate.home', [
                             $timeout.cancel( statusChecker );
                             $timeout.cancel( updateChecker );
                         }
-  );
+    );
           
     //once for startup
     $scope.getStatus(); 
