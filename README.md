@@ -3,6 +3,11 @@
 A pretty GUI for managing [ARK: Survival Evolved](http://store.steampowered.com/app/346110/) dedicated servers.
 
 ***
+### Features
+ - Run admin commands like Broadcast, GiveItemToPlayer, et cetera
+ - start, stop, and update the server
+ - View CPU load and number of current active players
+ - 'Connect to Server' button - so you can send your friends a link and they can quickly connect
 
 ### Warning
 ojo is very, very early alpha software and might break at any time. Also, make sure you secure your ARK server with a good password.
@@ -39,9 +44,7 @@ Finally, open `file:///path/to/ojo/build/index.html` in your browser. If all wen
 You'll most likely want to run ojo as a service indefinitely like a website, so I'd recommend using [http-server](https://github.com/indexzero/http-server) to serve up the build folder.
 
 ## Future Work
- - Put server information in the login page so others can connect to the server easily
  - Have a pre-populated command section so that users don't have to look up admin commands
- - Prompt the user to update if the system needs to update
  - Include more of the information from arkWatcher's other endpoints
  - Include angular-animate for pretty fades on the gauges and pretty transitions
 
