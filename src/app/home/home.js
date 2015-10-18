@@ -17,7 +17,7 @@ angular.module( 'ngBoilerplate.home', [
   });
 })
 
-.controller( 'HomeCtrl', function HomeController( $scope, $http, $timeout, alertService ) {
+.controller( 'HomeCtrl', function HomeController( $scope, $http, $interval, alertService ) {
     
     $scope.getStatus = function(){
       $http.get($scope.baseUrl + ":" + $scope.port + "/systemLoad")
@@ -95,9 +95,18 @@ angular.module( 'ngBoilerplate.home', [
     /*
      * Initialization
      */
-    $timeout($scope.getStatus, 5000); //update every 5 seconds
-    $timeout($scope.checkUpdate, (1000 * 60 * 15)); //update every 15 mins
-    
+    var statusChecker = $interval($scope.getStatus, 5000); //update every 5 seconds
+    var updateChecker = $interval($scope.checkUpdate, (1000 * 60 * 15)); //update every 15 mins
+    // listen on DOM destroy (removal) event, and cancel the next UI update
+      // to prevent updating time after the DOM element was removed.
+     $scope.$on(
+              "$destroy",
+                        function( event ) {
+                            $timeout.cancel( statusChecker );
+                            $timeout.cancel( updateChecker );
+                        }
+  );
+          
     //once for startup
     $scope.getStatus(); 
     $scope.checkUpdate();
